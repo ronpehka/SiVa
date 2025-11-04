@@ -16,7 +16,7 @@ SiVa is digital signature validation web service that provides JSON API to valid
 
 ### Libraries used in validation services
 
-Below is list of Java libraries used for validation:
+Below is list of Java libraries used for validation
 
 * [DigiDoc4J](https://github.com/open-eid/digidoc4j) - is used to validate DDOC and BDOC digital signature containers.
 * [DigiDoc4J DSS fork](https://github.com/open-eid/sd-dss) - to validate all other digitally signed files.
