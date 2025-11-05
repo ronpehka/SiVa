@@ -66,7 +66,7 @@ Logs for all running containers can be viewed at http://localhost:11080.
 ### Without docker
 
 SiVa project compiles **1 fat executable JAR** file that You can run after successfully building the
-project by issuing below command:
+project by issuig below command:
 
 **Starting the SiVa REST webservice. NB! X.X.X denotes the version you are running.**
 
