@@ -3,13 +3,12 @@ updates:
   - package-ecosystem: "maven"
     directory: "/"
     schedule:
-      interval: "weekly"
-      day: "wednesday"
-      time: "06:00"
+      interval: "daily"
+      time: "03:00"
       timezone: "Europe/Tallinn"
     target-branch: "dependency-updates"
-    open-pull-requests-limit: 50
-        ignore:
+    open-pull-requests-limit: 10
+    ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major"]
     commit-message:
