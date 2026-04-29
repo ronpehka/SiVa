@@ -6,7 +6,7 @@ updates:
       interval: "daily"
       time: "03:00"
       timezone: "Europe/Tallinn"
-    target-branch: "dependency-updates"
+    target-branch: "dependency-update"
     open-pull-requests-limit: 10
     ignore:
       - dependency-name: "*"
