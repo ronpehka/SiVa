@@ -1,0 +1,38 @@
+name: Rename Dependabot PR
+
+on:
+  pull_request_target:
+    types: [opened, reopened, synchronize]
+
+permissions:
+  pull-requests: write
+
+jobs:
+  rename:
+    runs-on: ubuntu-latest
+    if: github.actor == 'dependabot[bot]' && github.event.pull_request.base.ref == 'dependency-update'
+    steps:
+      - name: Fetch Dependabot metadata
+        id: meta
+        uses: dependabot/fetch-metadata@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Rename PR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          NAMES: ${{ steps.meta.outputs.dependency-names }}
+        run: |
+          IFS=',' read -ra deps <<< "$NAMES"
+          trimmed=()
+          for d in "${deps[@]}"; do
+            trimmed+=("$(echo "$d" | xargs)")
+          done
+          if [ "${#trimmed[@]}" -le 3 ]; then
+            joined=$(IFS=', '; echo "${trimmed[*]}")
+            title="Updated ${joined}"
+          else
+            title="Updated dependencies"
+          fi
+          gh pr edit "$PR_URL" --title "$title"
