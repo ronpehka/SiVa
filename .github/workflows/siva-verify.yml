@@ -8,10 +8,12 @@ on:
     branches:
       - master
       - develop
+      - dependency-update
   pull_request:
     branches:
       - master
       - develop
+      - dependency-update
 
 jobs:
   siva_build:
