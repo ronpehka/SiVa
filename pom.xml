@@ -118,7 +118,7 @@
         <dss.version>6.0.1.d4j.1</dss.version>
         <commons.collections.version>4.5.0</commons.collections.version>
         <commons.io.version>2.19.0</commons.io.version>
-        <json.version>20250107</json.version>
+        <json.version>20251224</json.version>
         <spring.boot.version>3.5.14</spring.boot.version>
 
         <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
