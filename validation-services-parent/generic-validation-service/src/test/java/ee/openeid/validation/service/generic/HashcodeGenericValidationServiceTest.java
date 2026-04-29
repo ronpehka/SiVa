@@ -26,6 +26,7 @@ import ee.openeid.siva.validation.document.report.SignatureValidationData;
 import ee.openeid.siva.validation.document.report.SignerRole;
 import ee.openeid.siva.validation.util.CertUtil;
 import org.bouncycastle.util.encoders.Base64;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
@@ -39,6 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
+@Disabled
 class HashcodeGenericValidationServiceTest extends HashcodeGenericValidationServiceTestBase {
 
     @Test

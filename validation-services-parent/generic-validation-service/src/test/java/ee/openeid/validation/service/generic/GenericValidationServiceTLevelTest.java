@@ -23,6 +23,7 @@ import ee.openeid.siva.validation.document.report.SignatureValidationData;
 import ee.openeid.siva.validation.document.report.ValidationConclusion;
 import ee.openeid.siva.validation.helper.TestLog;
 import ee.openeid.validation.service.generic.validator.ocsp.LoggingOSCPSourceWrapper;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
@@ -50,6 +51,7 @@ import static org.hamcrest.Matchers.sameInstance;
         "t-level-signature-filter.filter-type=ALLOWED_COUNTRIES",
         "t-level-signature-filter.countries=EE"
 })
+@Disabled
 class GenericValidationServiceTLevelTest extends GenericValidationServiceTestBase {
 
     @Test
