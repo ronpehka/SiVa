@@ -1,0 +1,53 @@
+name: Weekly dependency-update PR
+
+on:
+  schedule:
+    - cron: "0 4 * * 3"   # Wednesdays 04:00 UTC (~07:00 Europe/Tallinn)
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  open-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: dependency-update
+
+      - name: Check diff vs develop
+        id: diff
+        run: |
+          git fetch origin develop
+          if git diff --quiet origin/develop...HEAD; then
+            echo "has_diff=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_diff=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Check for existing PR
+        if: steps.diff.outputs.has_diff == 'true'
+        id: existing
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          count=$(gh pr list \
+            --base develop \
+            --head dependency-update \
+            --state open \
+            --json number --jq 'length')
+          echo "count=$count" >> "$GITHUB_OUTPUT"
+
+      - name: Create PR
+        if: steps.diff.outputs.has_diff == 'true' && steps.existing.outputs.count == '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr create \
+            --base develop \
+            --head dependency-update \
+            --title "deps: weekly dependency rollup ($(date +%Y-%m-%d))" \
+            --body "Weekly rollup of Dependabot updates from \`dependency-update\` into \`develop\`. Only minor + patch bumps (major versions are blocked at the Dependabot level)."
