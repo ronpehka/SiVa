@@ -11,6 +11,44 @@ updates:
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major"]
+    groups:
+      spring-boot:
+        patterns:
+          - "org.springframework.boot:*"
+          - "org.springframework:*"
+      bouncycastle:
+        patterns:
+          - "org.bouncycastle:*"
+      digidoc4j-dss:
+        patterns:
+          - "org.digidoc4j:*"
+          - "eu.europa.ec.joinup.sd-dss:*"
+      apache-commons:
+        patterns:
+          - "org.apache.commons:*"
+          - "commons-*:*"
+      testing:
+        patterns:
+          - "org.junit*:*"
+          - "org.mockito:*"
+          - "org.assertj:*"
+          - "io.rest-assured:*"
     commit-message:
       prefix: "deps"
+      include: "scope"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "03:00"
+      timezone: "Europe/Tallinn"
+    target-branch: "dependency-update"
+    open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+    commit-message:
+      prefix: "ci"
       include: "scope"
